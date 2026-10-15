@@ -14,10 +14,11 @@ public class movement : MonoBehaviour
     public float r;
     public LayerMask whatIsGround;
     private bool grounded;
+    private Animator anim;
 
     void Start()
     {
-
+anim=GetComponent<Animator>();
     }
     void Update (){
 
@@ -30,6 +31,7 @@ public class movement : MonoBehaviour
             GetComponent<SpriteRenderer>().flipX = true;
         }
         }
+        anim.SetFloat("Speed",Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x));
 
         if (Input.GetKey(R))
         {
@@ -48,8 +50,10 @@ public class movement : MonoBehaviour
             jump();
         }
    
-
+anim.SetFloat("Height", GetComponent<Rigidbody2D>().velocity.y);
+anim.SetBool("Grounded", grounded);
     }
+    
 void jump()
     {
         
